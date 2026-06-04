@@ -1,4 +1,4 @@
-package io.github.kotlin.fibonacci
+package com.design.workshop.expressive
 
 fun generateFibi() = sequence {
     var a = firstElement
