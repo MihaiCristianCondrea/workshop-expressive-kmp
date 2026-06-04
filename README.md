@@ -12,29 +12,19 @@ Note that no other actions or tools usually required for the library development
 
 ## Compose icon collections
 
-The `shared-ui` module exposes the open source [Compose icon collections](https://github.com/walter-juan/compose-icon-collections) artifacts as `api` dependencies, so apps that depend on this KMP UI library can import and use the icon packs directly without adding the icon coordinates again.
+The `shared-ui` module exposes the open source [Remix Icon Compose collection](https://github.com/walter-juan/compose-icon-collections) as an `api` dependency, so apps that depend on this KMP UI library can import and use Remix icons directly without adding the icon coordinate again.
 
-Supported icon packs:
+Available icon pack:
 
 | Icon pack | Artifact |
 | --- | --- |
-| Tabler | `com.woowla.compose.icon.collections:tabler` |
-| Octicons | `com.woowla.compose.icon.collections:octicons` |
 | Remix Icon | `com.woowla.compose.icon.collections:remix` |
-| Boxicons | `com.woowla.compose.icon.collections:boxicons` |
-| Feather | `com.woowla.compose.icon.collections:feather` |
-| Ionicons | `com.woowla.compose.icon.collections:ionicons` |
-| Font Awesome | `com.woowla.compose.icon.collections:fontawesome` |
-| Heroicons | `com.woowla.compose.icon.collections:heroicons` |
-| Simple Icons | `com.woowla.compose.icon.collections:simpleicons` |
-| Bootstrap Icons | `com.woowla.compose.icon.collections:twbs` |
 
 Example usage from a consuming Compose Multiplatform app:
 
 ```kotlin
-Icon(imageVector = Octicons.Home16, contentDescription = null)
-Icon(imageVector = Tabler.Filled.HospitalCircle, contentDescription = null)
-Icon(imageVector = Tabler.Outline.HospitalCircle, contentDescription = null)
+Icon(imageVector = Remix.System.HomeLine, contentDescription = null)
+Icon(imageVector = Remix.Health.MedicineBottleFill, contentDescription = null)
 ```
 
 ## Guide

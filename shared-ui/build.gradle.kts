@@ -18,16 +18,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(libs.compose.icon.collections.tabler)
-            api(libs.compose.icon.collections.octicons)
             api(libs.compose.icon.collections.remix)
-            api(libs.compose.icon.collections.boxicons)
-            api(libs.compose.icon.collections.feather)
-            api(libs.compose.icon.collections.ionicons)
-            api(libs.compose.icon.collections.fontawesome)
-            api(libs.compose.icon.collections.heroicons)
-            api(libs.compose.icon.collections.simpleicons)
-            api(libs.compose.icon.collections.twbs)
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.ui)

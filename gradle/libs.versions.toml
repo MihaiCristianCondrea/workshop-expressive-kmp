@@ -5,28 +5,10 @@ android-minSdk = "24"
 android-compileSdk = "36"
 vanniktechMavenPublish = "0.36.0"
 composeMultiplatform = "1.9.0"
-composeIconCollectionsTabler = "3.29.0"
-composeIconCollectionsOcticons = "19.21.2"
 composeIconCollectionsRemix = "4.9.0"
-composeIconCollectionsBoxicons = "2.1.4"
-composeIconCollectionsFeather = "4.29.2"
-composeIconCollectionsIonicons = "8.0.13"
-composeIconCollectionsFontawesome = "7.1.0"
-composeIconCollectionsHeroicons = "2.2.0"
-composeIconCollectionsSimpleicons = "16.6.1"
-composeIconCollectionsTwbs = "1.11.3"
 
 [libraries]
-compose-icon-collections-tabler = { module = "com.woowla.compose.icon.collections:tabler", version.ref = "composeIconCollectionsTabler" }
-compose-icon-collections-octicons = { module = "com.woowla.compose.icon.collections:octicons", version.ref = "composeIconCollectionsOcticons" }
 compose-icon-collections-remix = { module = "com.woowla.compose.icon.collections:remix", version.ref = "composeIconCollectionsRemix" }
-compose-icon-collections-boxicons = { module = "com.woowla.compose.icon.collections:boxicons", version.ref = "composeIconCollectionsBoxicons" }
-compose-icon-collections-feather = { module = "com.woowla.compose.icon.collections:feather", version.ref = "composeIconCollectionsFeather" }
-compose-icon-collections-ionicons = { module = "com.woowla.compose.icon.collections:ionicons", version.ref = "composeIconCollectionsIonicons" }
-compose-icon-collections-fontawesome = { module = "com.woowla.compose.icon.collections:fontawesome", version.ref = "composeIconCollectionsFontawesome" }
-compose-icon-collections-heroicons = { module = "com.woowla.compose.icon.collections:heroicons", version.ref = "composeIconCollectionsHeroicons" }
-compose-icon-collections-simpleicons = { module = "com.woowla.compose.icon.collections:simpleicons", version.ref = "composeIconCollectionsSimpleicons" }
-compose-icon-collections-twbs = { module = "com.woowla.compose.icon.collections:twbs", version.ref = "composeIconCollectionsTwbs" }
 compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "composeMultiplatform" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMultiplatform" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
