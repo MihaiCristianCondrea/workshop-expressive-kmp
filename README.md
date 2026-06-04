@@ -10,6 +10,23 @@ The library has only one function: generate the [Fibonacci sequence](https://en.
 
 Note that no other actions or tools usually required for the library development are set up, such as [tracking of backwards compatibility](https://kotlinlang.org/docs/jvm-api-guidelines-backward-compatibility.html#tools-designed-to-enforce-backward-compatibility), explicit API mode, licensing, contribution guideline, code of conduct and others. You can find a guide for best practices for designing Kotlin libraries [here](https://kotlinlang.org/docs/api-guidelines-introduction.html).
 
+## Compose icon collections
+
+The `shared-ui` module exposes the open source [Remix Icon Compose collection](https://github.com/walter-juan/compose-icon-collections) as an `api` dependency, so apps that depend on this KMP UI library can import and use Remix icons directly without adding the icon coordinate again.
+
+Available icon pack:
+
+| Icon pack | Artifact |
+| --- | --- |
+| Remix Icon | `com.woowla.compose.icon.collections:remix` |
+
+Example usage from a consuming Compose Multiplatform app:
+
+```kotlin
+Icon(imageVector = Remix.System.HomeLine, contentDescription = null)
+Icon(imageVector = Remix.Health.MedicineBottleFill, contentDescription = null)
+```
+
 ## Guide
 
 Please find the detailed guide [here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html).
