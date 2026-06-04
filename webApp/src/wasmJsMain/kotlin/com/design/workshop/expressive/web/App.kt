@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.design.workshop.expressive.ui.components.badge.WsBadge
 import com.design.workshop.expressive.ui.components.badge.WsBadgeTone
 import com.design.workshop.expressive.ui.components.button.WsButton
