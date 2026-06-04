@@ -6,13 +6,13 @@ plugins {
     alias(libs.plugins.vanniktech.mavenPublish)
 }
 
-group = "io.github.kotlin"
+group = "com.design.workshop.expressive"
 version = "1.0.0"
 
 kotlin {
     jvm()
     androidLibrary {
-        namespace = "org.jetbrains.kotlinx.multiplatform.library.template"
+        namespace = "com.design.workshop.expressive"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -49,10 +49,10 @@ mavenPublishing {
     coordinates(group.toString(), "library", version.toString())
 
     pom {
-        name = "My library"
-        description = "A library."
-        inceptionYear = "2024"
-        url = "https://github.com/kotlin/multiplatform-library-template/"
+        name = "WorkShop Expressive Library"
+        description = "Shared Kotlin Multiplatform foundation for WorkShop Expressive."
+        inceptionYear = "2026"
+        url = "https://github.com/design/workshop-expressive-kmp/"
         licenses {
             license {
                 name = "XXX"

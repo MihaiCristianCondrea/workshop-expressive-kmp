@@ -1,4 +1,4 @@
-package io.github.kotlin.fibonacci
+package com.design.workshop.expressive
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
