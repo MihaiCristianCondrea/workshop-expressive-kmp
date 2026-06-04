@@ -3,6 +3,7 @@ package com.design.workshop.expressive.ui.components.button
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.Button
@@ -46,7 +47,7 @@ fun WsButton(
     val horizontalPadding = size.horizontalPadding
     val buttonEnabled = enabled && !loading
 
-    val content: @Composable () -> Unit = {
+    val content: @Composable RowScope.() -> Unit = {
         if (loading) {
             CircularProgressIndicator(
                 modifier = Modifier.defaultMinSize(minWidth = 18.dp, minHeight = 18.dp),
