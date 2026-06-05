@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.design.workshop.expressive"
-version = "0.0.5"
+version = "0.0.6"
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
