@@ -95,27 +95,6 @@ fun ComponentGallery() {
         ) {
             Column(verticalArrangement = Arrangement.spacedBy(spacing.sm)) {
                 WsBadge(text = "Milestone 1", tone = WsBadgeTone.Info)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = "Work",
-                        color = Color.Black,
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = "Shop",
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Spacer(Modifier.width(spacing.sm))
-                    Text(
-                        text = "Expressive UI Kit",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
                 Text(
                     text = "White-first tokens and reusable learning UI components for Kotlin Multiplatform apps.",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -272,7 +251,7 @@ private fun DrawerHeader() {
                 Row {
                     Text(
                         text = "Work",
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                     )
