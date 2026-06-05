@@ -3,10 +3,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
+    `maven-publish`
 }
 
 group = "com.design.workshop.expressive"
-version = "1.0.0"
+version = "0.0.5"
 
 kotlin {
     jvm()
