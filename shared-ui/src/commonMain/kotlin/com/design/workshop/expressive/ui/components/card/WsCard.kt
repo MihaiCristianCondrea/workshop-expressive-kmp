@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
 import com.design.workshop.expressive.ui.theme.WorkshopThemeTokens
 import com.design.workshop.expressive.ui.theme.WsColors
 
@@ -42,16 +41,10 @@ fun WsCard(
     val radius = WorkshopThemeTokens.radius
     val spacing = WorkshopThemeTokens.spacing
     val border = WorkshopThemeTokens.border
-    val elevation = WorkshopThemeTokens.elevation
     val alpha = WorkshopThemeTokens.alpha
 
-    val shape: Shape = when (variant) {
-        WsCardVariant.Default -> MaterialTheme.shapes.medium
-        WsCardVariant.Screen -> RoundedCornerShape(radius.lg)
-        WsCardVariant.Panel -> RoundedCornerShape(radius.md)
-        WsCardVariant.Elevated -> RoundedCornerShape(radius.lg)
-        WsCardVariant.Code -> RoundedCornerShape(radius.sm)
-    }
+    val shape: Shape = RoundedCornerShape(radius.md)
+
     val resolvedPadding = contentPadding ?: when (variant) {
         WsCardVariant.Default -> PaddingValues(spacing.lg)
         WsCardVariant.Screen -> PaddingValues(spacing.xl)

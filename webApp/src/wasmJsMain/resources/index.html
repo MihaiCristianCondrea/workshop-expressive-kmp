@@ -3,15 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkShop Expressive</title>
+    <title>WorkShop Expressive | Modern Kotlin Multiplatform UI Kit</title>
+
+    <meta name="description" content="Build expressive, cross-platform learning applications with WorkShop Expressive. A premium Compose Multiplatform UI Kit designed for developer education.">
+    <meta name="keywords" content="Kotlin Multiplatform, Compose Multiplatform, UI Kit, Design System, Android, iOS, Wasm, Desktop, Developer Education">
+    <meta name="author" content="WorkShop Expressive Team">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WorkShop Expressive - Premium Multiplatform UI Kit">
+    <meta property="og:description" content="The design system for modern learning apps. Built with Kotlin and Compose Multiplatform.">
+    <meta property="og:url" content="https://workshop-expressive.com">
+    <meta property="og:site_name" content="WorkShop Expressive">
+
     <style>
         html, body {
             margin: 0;
             width: 100%;
-            min-height: 100%;
-            background: #0B1020;
+            height: 100%;
+            background: #0F172A; /* Aligned with WsColors.DarkBackground */
+            overflow: hidden;
+        }
+
+        /* Screen reader only content for SEO and Accessibility */
+        .seo-fallback-content {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
     </style>
+    <script type="text/javascript" src="webApp.js"></script>
 </head>
-<body></body>
+<body>
+
+<div class="seo-fallback-content">
+    <h1>WorkShop Expressive</h1>
+    <h2>Expressive UI Components for Kotlin Multiplatform</h2>
+
+    <p>WorkShop Expressive is a modern, high-performance UI toolkit built entirely with Compose Multiplatform. It provides developer-first tokens, atoms, and complex molecules to accelerate the creation of educational software on Android, iOS, Desktop, and Web (Wasm).</p>
+
+    <h3>Key Components</h3>
+    <ul>
+        <li>Animated Navigation Drawer with dynamic icons</li>
+        <li>Bouncy, tactile Buttons with interaction feedback</li>
+        <li>Adaptive Card surfaces with refined token-based radii</li>
+        <li>Type-safe Breadcrumb navigation</li>
+        <li>Progress indicators and semantic Input fields</li>
+    </ul>
+
+    <h3>Design Principles</h3>
+    <p>Our system is built on four core pillars: Focus, Expression, Empowerment, and Technical Excellence. We prioritize white-first design tokens with robust Dark Mode support across all platforms.</p>
+</div>
+
+<div id="compose-root"></div>
+
+</body>
 </html>

@@ -55,6 +55,8 @@ import com.design.workshop.expressive.ui.components.card.WsCard
 import com.design.workshop.expressive.ui.components.drawer.WsDrawer
 import com.design.workshop.expressive.ui.components.drawer.WsDrawerItem
 import com.design.workshop.expressive.ui.components.input.WsTextField
+import com.design.workshop.expressive.ui.components.navigation.WsBreadcrumbs
+import com.design.workshop.expressive.ui.components.navigation.WsCrumb
 import com.design.workshop.expressive.ui.components.progress.WsCircularProgress
 import com.design.workshop.expressive.ui.components.progress.WsLinearProgress
 import com.design.workshop.expressive.ui.theme.WorkshopTheme
@@ -94,8 +96,37 @@ fun ComponentGallery() {
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(spacing.xl),
         ) {
+            WsBreadcrumbs(
+                crumbs = listOf(
+                    WsCrumb(id = "home", label = "Home"),
+                    WsCrumb(id = "ui-kit", label = "Expressive UI Kit"),
+                    WsCrumb(id = "catalog", label = "Component Gallery"),
+                )
+            )
+
             Column(verticalArrangement = Arrangement.spacedBy(spacing.sm)) {
                 WsBadge(text = "Milestone 1", tone = WsBadgeTone.Info)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "Work",
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        text = "Shop",
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(Modifier.width(spacing.sm))
+                    Text(
+                        text = "Expressive UI Kit",
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
                 Text(
                     text = "White-first tokens and reusable learning UI components for Kotlin Multiplatform apps.",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -143,7 +174,6 @@ fun ComponentGallery() {
                         WsButton(text = "Small", onClick = {}, size = WsButtonSize.Small)
                         WsButton(text = "Medium", onClick = {}, size = WsButtonSize.Medium)
                         WsButton(text = "Large", onClick = {}, size = WsButtonSize.Large)
-                        WsButton(text = "Loading", onClick = {}, loading = true)
                     }
                 }
             }
