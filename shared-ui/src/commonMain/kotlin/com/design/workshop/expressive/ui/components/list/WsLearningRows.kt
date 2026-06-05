@@ -28,7 +28,7 @@ enum class WsStatus { Complete, Current, Upcoming }
 /**
  * Compact label/value row for course metadata.
  *
- * Pass a Remix icon glyph, emoji, or other short [icon] text. The text fallback keeps this component
+ * Pass an icon glyph, emoji, or other short [icon] text. The text fallback keeps this component
  * compatible with every Compose Multiplatform target and with apps that do not opt into vector icons.
  */
 @Composable
@@ -67,7 +67,7 @@ fun WsMetadataRow(
  * Atlas-style chapter/status row with selected and upcoming state treatment.
  *
  * Defaults use `✓`, `▶`, and `○` as status symbols; provide [statusSymbol] to override, or pass a
- * Remix icon glyph string from your app if desired.
+ * icon glyph string from your app if desired.
  */
 @Composable
 fun WsStatusRow(

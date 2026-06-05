@@ -106,19 +106,8 @@ For lesson detail screens, the left side should hold the lesson content, Markdow
 
 The goal is focus and momentum: Atlas should make learners feel like they are moving forward through a learning path, not simply operating a productivity app.
 
-## Compose icon collections
+## Icons
 
-The `shared-ui` module exposes the open source [Remix Icon Compose collection](https://github.com/walter-juan/compose-icon-collections) as an `api` dependency, so apps that depend on this KMP UI library can import and use Remix icons directly without adding the icon coordinate again.
+WorkShop Expressive components accept plain Compose icon slots, `ImageVector` values, or text/emoji fallbacks depending on the component. The library intentionally does not export a third-party icon pack from `commonMain`, because icon collections can have narrower platform support than this design system and can break JS/Wasm builds.
 
-Available icon pack:
-
-| Icon pack | Artifact |
-| --- | --- |
-| Remix Icon | `com.woowla.compose.icon.collections:remix` |
-
-Example usage from a consuming Compose Multiplatform app:
-
-```kotlin
-Icon(imageVector = Remix.System.HomeLine, contentDescription = null)
-Icon(imageVector = Remix.Health.MedicineBottleFill, contentDescription = null)
-```
+Apps should add their preferred icon pack directly in the source set where it is supported. For example, if a product uses Remix icons on Android, iOS, JVM, and Wasm, keep that dependency in the app or in platform-specific source sets instead of forcing every `:shared-ui` consumer to resolve it on JS.
