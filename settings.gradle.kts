@@ -16,6 +16,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "workshop-expressive-kmp"
-include(":library")
 include(":shared-ui")
+include(":catalog")
 include(":webApp")

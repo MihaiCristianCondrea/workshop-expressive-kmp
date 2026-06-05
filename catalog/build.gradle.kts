@@ -13,7 +13,7 @@ version = "0.0.6"
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
     androidLibrary {
-        namespace = "com.design.workshop.expressive.ui"
+        namespace = "com.design.workshop.expressive.catalog"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -37,11 +37,23 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(libs.compose.icon.collections.remix)
+            implementation(project(":shared-ui"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.ui)
             implementation(libs.compose.material3)
         }
+
+        jvmMain.dependencies {
+            implementation(libs.compose.desktop.current.os)
+        }
     }
+}
+
+tasks.register<JavaExec>("runDesktop") {
+    group = "workshop"
+    description = "Runs the WorkShop Expressive catalog as a local desktop app."
+    mainClass.set("com.design.workshop.expressive.catalog.MainKt")
+    val mainCompilation = kotlin.targets.getByName("jvm").compilations.getByName("main")
+    classpath = files(mainCompilation.output.allOutputs, mainCompilation.runtimeDependencyFiles)
 }

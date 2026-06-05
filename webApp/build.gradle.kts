@@ -21,7 +21,7 @@ kotlin {
 
     sourceSets {
         wasmJsMain.dependencies {
-            implementation(project(":shared-ui"))
+            implementation(project(":catalog"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.ui)
