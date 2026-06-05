@@ -12,7 +12,7 @@ version = "0.0.6"
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
-    androidLibrary {
+    android {
         namespace = "com.design.workshop.expressive.catalog"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()

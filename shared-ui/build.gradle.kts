@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.composeCompiler)
+    `maven-publish`
 }
 
 group = "com.design.workshop.expressive"
@@ -12,7 +13,7 @@ version = "0.0.6"
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
-    androidLibrary {
+    android {
         namespace = "com.design.workshop.expressive.ui"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
