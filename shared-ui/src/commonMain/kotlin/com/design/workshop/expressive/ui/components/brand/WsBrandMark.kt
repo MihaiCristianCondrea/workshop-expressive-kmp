@@ -35,7 +35,7 @@ fun WsBrandMark(
     title: String,
     subtitle: String?,
     size: Dp,
-    gradientColors: List<Color>,
+    gradientColors: List<Color>, // FIXME: Parameter 'gradientColors' has runtime-determined stability
     modifier: Modifier = Modifier,
 ) {
     val colors = if (gradientColors.size >= 2) {

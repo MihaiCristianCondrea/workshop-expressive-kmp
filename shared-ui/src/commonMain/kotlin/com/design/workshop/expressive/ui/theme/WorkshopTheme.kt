@@ -1,5 +1,6 @@
 package com.design.workshop.expressive.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -44,7 +45,7 @@ private val LightScheme = lightColorScheme(
 
 @Composable
 fun WorkshopTheme(
-    darkTheme: Boolean = true,
+    darkTheme: Boolean = isSystemInDarkTheme(),
     spacing: WsSpacing = WsSpacing(),
     radius: WsRadius = WsRadius(),
     border: WsBorder = WsBorder(),
@@ -61,7 +62,7 @@ fun WorkshopTheme(
     ) {
         MaterialTheme(
             colorScheme = if (darkTheme) DarkScheme else LightScheme,
-            typography = WsTypography,
+            typography = getWorkshopTypography(),
             shapes = WsShapes,
             content = content,
         )

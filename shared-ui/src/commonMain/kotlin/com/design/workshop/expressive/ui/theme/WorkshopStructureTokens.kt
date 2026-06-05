@@ -8,13 +8,13 @@ import androidx.compose.ui.unit.dp
 /** Radius scale for Workshop Expressive learning surfaces and controls. */
 @Immutable
 data class WsRadius(
-    val xs: Dp = 7.dp,
-    val sm: Dp = 10.dp,
-    val md: Dp = 12.dp,
-    val lg: Dp = 14.dp,
-    val xl: Dp = 22.dp,
-    val xxl: Dp = 28.dp,
-    val screen: Dp = 34.dp,
+    val xs: Dp = 2.dp,
+    val sm: Dp = 4.dp,
+    val md: Dp = 6.dp,
+    val lg: Dp = 8.dp,
+    val xl: Dp = 10.dp,
+    val xxl: Dp = 12.dp,
+    val screen: Dp = 16.dp,
     val pill: Dp = 999.dp,
 )
 
@@ -27,9 +27,9 @@ data class WsBorder(
 /** Elevation values for cards, shells, and drawer-like surfaces. */
 @Immutable
 data class WsElevation(
-    val card: Dp = 1.dp,
-    val shell: Dp = 2.dp,
-    val drawer: Dp = 8.dp,
+    val card: Dp = 0.dp,
+    val shell: Dp = 0.dp,
+    val drawer: Dp = 0.dp,
 )
 
 /** Alpha roles for soft fills and selected overlays. */

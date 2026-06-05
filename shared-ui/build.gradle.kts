@@ -4,12 +4,17 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     `maven-publish`
 }
 
 group = "com.design.workshop.expressive"
 version = "0.0.6"
+
+compose.resources {
+    publicResClass = true
+}
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
@@ -39,6 +44,7 @@ kotlin {
             implementation(libs.compose.foundation)
             implementation(libs.compose.ui)
             implementation(libs.compose.material3)
+            implementation(libs.compose.components.resources)
         }
     }
 }

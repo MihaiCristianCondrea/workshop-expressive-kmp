@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +22,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.woowla.compose.icon.collections.remix.Remix
+import com.woowla.compose.icon.collections.remix.remix.System
+import com.woowla.compose.icon.collections.remix.remix.system.SearchLine
 import com.design.workshop.expressive.ui.theme.WorkshopThemeTokens
 import com.design.workshop.expressive.ui.theme.WsColors
 
@@ -69,10 +74,11 @@ fun WsSearchField(
                 if (leadingIcon != null) {
                     leadingIcon()
                 } else {
-                    Text(
-                        text = "⌕",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        style = MaterialTheme.typography.bodyMedium,
+                    Icon(
+                        imageVector = Remix.System.SearchLine,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
                 Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {

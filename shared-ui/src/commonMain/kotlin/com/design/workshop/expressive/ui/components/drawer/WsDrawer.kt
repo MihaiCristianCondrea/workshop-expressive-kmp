@@ -1,5 +1,12 @@
 package com.design.workshop.expressive.ui.components.drawer
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,13 +39,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.woowla.compose.icon.collections.remix.Remix
+import com.woowla.compose.icon.collections.remix.remix.Arrows
+import com.woowla.compose.icon.collections.remix.remix.arrows.ArrowDownSLine
 import com.design.workshop.expressive.ui.components.progress.WsLinearProgress
 import com.design.workshop.expressive.ui.theme.WorkshopThemeTokens
 import com.design.workshop.expressive.ui.theme.WsColors
@@ -48,6 +60,7 @@ data class WsDrawerItem(
     val id: String,
     val title: String,
     val icon: ImageVector? = null,
+    val selectedIcon: ImageVector? = null,
     val subtitle: String? = null,
     val badge: String? = null,
     val progress: Float? = null,
@@ -58,10 +71,10 @@ data class WsDrawerItem(
 
 @Composable
 fun WsDrawer(
-    primaryItems: List<WsDrawerItem>,
+    primaryItems: List<WsDrawerItem>, // FIXME:Parameter 'primaryItems' has runtime-determined stability
     modifier: Modifier = Modifier,
     selectedItemId: String? = null,
-    collapsibleItems: List<WsDrawerItem> = emptyList(),
+    collapsibleItems: List<WsDrawerItem> = emptyList(), // FIXME: Parameter 'collapsibleItems' has runtime-determined stability
     onItemClick: (WsDrawerItem) -> Unit = {},
     width: Dp = 280.dp,
     header: (@Composable () -> Unit)? = null,
@@ -80,8 +93,6 @@ fun WsDrawer(
         color = MaterialTheme.colorScheme.surface,
         shape = MaterialTheme.shapes.large,
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)),
-        tonalElevation = 1.dp,
-        shadowElevation = 8.dp,
     ) {
         Column(
             modifier = Modifier.padding(spacing.xl),
@@ -152,17 +163,39 @@ private fun WsDrawerItemRow(
     onToggleExpanded: (String) -> Unit,
 ) {
     val spacing = WorkshopThemeTokens.spacing
+    val radius = WorkshopThemeTokens.radius
     val hasChildren = item.children.isNotEmpty()
     val selected = item.id == selectedItemId
     val expanded = item.id in expandedIds
     val indentation = (level * 18).dp
 
+    val selectionAlpha by animateFloatAsState(if (selected) 1f else 0f, label = "Selection Background Alpha")
+    val arrowRotation by animateFloatAsState(if (expanded) 180f else 0f, label = "Arrow Rotation")
+
+    val contentColor by animateColorAsState(
+        targetValue = if (selected) Color.White else MaterialTheme.colorScheme.onSurface,
+        label = "Content Color"
+    )
+    val variantColor by animateColorAsState(
+        targetValue = if (selected) Color.White.copy(alpha = 0.82f) else MaterialTheme.colorScheme.onSurfaceVariant,
+        label = "Variant Content Color"
+    )
+
     Column(verticalArrangement = Arrangement.spacedBy(spacing.xs)) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(if (level == 0) 12.dp else 10.dp))
-                .background(if (selected) selectedBrush else Brush.linearGradient(listOf(Color.Transparent, Color.Transparent)))
+                .clip(RoundedCornerShape(if (level == 0) radius.md else radius.sm))
+                .drawWithCache {
+                    onDrawBehind {
+                        if (selectionAlpha > 0f) {
+                            drawRect(
+                                brush = selectedBrush,
+                                alpha = selectionAlpha
+                            )
+                        }
+                    }
+                }
                 .clickable(enabled = item.enabled) {
                     if (hasChildren) {
                         onToggleExpanded(item.id)
@@ -178,12 +211,13 @@ private fun WsDrawerItemRow(
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            if (item.icon != null) {
+            val displayIcon = if (selected && item.selectedIcon != null) item.selectedIcon else item.icon
+            if (displayIcon != null) {
                 Icon(
-                    imageVector = item.icon,
+                    imageVector = displayIcon,
                     contentDescription = null,
                     modifier = Modifier.size(if (level == 0) 20.dp else 16.dp),
-                    tint = if (selected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
+                    tint = variantColor,
                 )
                 Spacer(Modifier.width(spacing.md))
             } else if (level > 0) {
@@ -191,7 +225,7 @@ private fun WsDrawerItemRow(
                     modifier = Modifier
                         .size(if (selected) 7.dp else 5.dp)
                         .background(
-                            color = if (selected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.55f),
+                            color = variantColor.copy(alpha = if (selected) 1f else 0.55f),
                             shape = CircleShape,
                         ),
                 )
@@ -201,7 +235,7 @@ private fun WsDrawerItemRow(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = item.title,
-                    color = if (selected) Color.White else MaterialTheme.colorScheme.onSurface,
+                    color = contentColor,
                     style = if (level == 0) MaterialTheme.typography.bodyMedium else MaterialTheme.typography.labelMedium,
                     fontWeight = if (selected || hasChildren) FontWeight.SemiBold else FontWeight.Medium,
                     maxLines = 1,
@@ -210,7 +244,7 @@ private fun WsDrawerItemRow(
                 if (item.subtitle != null) {
                     Text(
                         text = item.subtitle,
-                        color = if (selected) Color.White.copy(alpha = 0.82f) else MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = variantColor,
                         style = MaterialTheme.typography.labelSmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -234,7 +268,7 @@ private fun WsDrawerItemRow(
                         .padding(start = spacing.sm)
                         .background(
                             color = if (selected) Color.White.copy(alpha = 0.18f) else MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
-                            shape = RoundedCornerShape(999.dp),
+                            shape = RoundedCornerShape(radius.xs),
                         )
                         .padding(horizontal = spacing.sm, vertical = 2.dp),
                     color = if (selected) Color.White else MaterialTheme.colorScheme.primary,
@@ -244,25 +278,34 @@ private fun WsDrawerItemRow(
             }
 
             if (hasChildren) {
-                Text(
-                    text = if (expanded) "⌃" else "⌄",
-                    modifier = Modifier.padding(start = spacing.sm),
-                    color = if (selected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyMedium,
+                Icon(
+                    imageVector = Remix.Arrows.ArrowDownSLine,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(start = spacing.sm)
+                        .size(20.dp)
+                        .graphicsLayer { rotationZ = arrowRotation },
+                    tint = variantColor,
                 )
             }
         }
 
-        if (hasChildren && expanded) {
-            item.children.forEach { child ->
-                WsDrawerItemRow(
-                    item = child,
-                    selectedItemId = selectedItemId,
-                    expandedIds = expandedIds,
-                    level = level + 1,
-                    onItemClick = onItemClick,
-                    onToggleExpanded = onToggleExpanded,
-                )
+        AnimatedVisibility(
+            visible = hasChildren && expanded,
+            enter = fadeIn() + expandVertically(),
+            exit = fadeOut() + shrinkVertically(),
+        ) {
+            Column(verticalArrangement = Arrangement.spacedBy(spacing.xs)) {
+                item.children.forEach { child ->
+                    WsDrawerItemRow(
+                        item = child,
+                        selectedItemId = selectedItemId,
+                        expandedIds = expandedIds,
+                        level = level + 1,
+                        onItemClick = onItemClick,
+                        onToggleExpanded = onToggleExpanded,
+                    )
+                }
             }
         }
     }

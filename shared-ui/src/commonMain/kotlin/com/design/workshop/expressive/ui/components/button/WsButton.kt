@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.design.workshop.expressive.ui.util.bounceClick
 
 enum class WsButtonVariant {
     Primary,
@@ -52,10 +53,17 @@ fun WsButton(
             CircularProgressIndicator(
                 modifier = Modifier.defaultMinSize(minWidth = 18.dp, minHeight = 18.dp),
                 strokeWidth = 2.dp,
-                color = Color.White,
+                color = if (variant == WsButtonVariant.Primary) Color.White else MaterialTheme.colorScheme.primary,
             )
         } else {
-            Text(text = text)
+            Text(
+                text = text,
+                style = when (size) {
+                    WsButtonSize.Small -> MaterialTheme.typography.labelSmall
+                    WsButtonSize.Medium -> MaterialTheme.typography.labelMedium
+                    WsButtonSize.Large -> MaterialTheme.typography.labelLarge
+                }
+            )
         }
     }
 
@@ -63,7 +71,7 @@ fun WsButton(
         WsButtonVariant.Primary -> Button(
             onClick = onClick,
             enabled = buttonEnabled,
-            modifier = modifier.heightIn(min = height),
+            modifier = modifier.heightIn(min = height).bounceClick(),
             shape = MaterialTheme.shapes.medium,
             contentPadding = PaddingValues(horizontal = horizontalPadding),
             interactionSource = interactionSource,
@@ -77,13 +85,13 @@ fun WsButton(
         WsButtonVariant.Secondary -> Button(
             onClick = onClick,
             enabled = buttonEnabled,
-            modifier = modifier.heightIn(min = height),
+            modifier = modifier.heightIn(min = height).bounceClick(),
             shape = MaterialTheme.shapes.medium,
             contentPadding = PaddingValues(horizontal = horizontalPadding),
             interactionSource = interactionSource,
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                contentColor = MaterialTheme.colorScheme.onSurface,
+                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                contentColor = MaterialTheme.colorScheme.primary,
             ),
             content = content,
         )
@@ -91,21 +99,24 @@ fun WsButton(
         WsButtonVariant.Tertiary -> OutlinedButton(
             onClick = onClick,
             enabled = buttonEnabled,
-            modifier = modifier.heightIn(min = height),
+            modifier = modifier.heightIn(min = height).bounceClick(),
             shape = MaterialTheme.shapes.medium,
             contentPadding = PaddingValues(horizontal = horizontalPadding),
             border = BorderStroke(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.35f),
+                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
             ),
             interactionSource = interactionSource,
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.onSurface,
+            ),
             content = content,
         )
 
         WsButtonVariant.Ghost -> OutlinedButton(
             onClick = onClick,
             enabled = buttonEnabled,
-            modifier = modifier.heightIn(min = height),
+            modifier = modifier.heightIn(min = height).bounceClick(),
             shape = MaterialTheme.shapes.medium,
             contentPadding = PaddingValues(horizontal = horizontalPadding),
             border = null,

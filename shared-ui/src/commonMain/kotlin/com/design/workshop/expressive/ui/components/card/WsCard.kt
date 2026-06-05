@@ -46,18 +46,18 @@ fun WsCard(
     val alpha = WorkshopThemeTokens.alpha
 
     val shape: Shape = when (variant) {
-        WsCardVariant.Default -> MaterialTheme.shapes.large
-        WsCardVariant.Screen -> RoundedCornerShape(radius.xl)
-        WsCardVariant.Panel -> RoundedCornerShape(radius.lg)
-        WsCardVariant.Elevated -> RoundedCornerShape(radius.xl)
-        WsCardVariant.Code -> RoundedCornerShape(radius.md)
+        WsCardVariant.Default -> MaterialTheme.shapes.medium
+        WsCardVariant.Screen -> RoundedCornerShape(radius.lg)
+        WsCardVariant.Panel -> RoundedCornerShape(radius.md)
+        WsCardVariant.Elevated -> RoundedCornerShape(radius.lg)
+        WsCardVariant.Code -> RoundedCornerShape(radius.sm)
     }
     val resolvedPadding = contentPadding ?: when (variant) {
-        WsCardVariant.Default -> PaddingValues(spacing.xl)
-        WsCardVariant.Screen -> PaddingValues(radius.xl)
+        WsCardVariant.Default -> PaddingValues(spacing.lg)
+        WsCardVariant.Screen -> PaddingValues(spacing.xl)
         WsCardVariant.Panel -> PaddingValues(spacing.lg)
         WsCardVariant.Elevated -> PaddingValues(spacing.xl)
-        WsCardVariant.Code -> PaddingValues(spacing.lg)
+        WsCardVariant.Code -> PaddingValues(spacing.md)
     }
     val resolvedContainerColor = containerColor ?: when (variant) {
         WsCardVariant.Code -> if (MaterialTheme.colorScheme.background == WsColors.DarkBackground) {
@@ -66,13 +66,6 @@ fun WsCard(
             WsColors.LightCodeBackground
         }
         else -> MaterialTheme.colorScheme.surface
-    }
-    val resolvedElevation = when (variant) {
-        WsCardVariant.Default -> elevation.card
-        WsCardVariant.Screen -> elevation.card
-        WsCardVariant.Panel -> elevation.card
-        WsCardVariant.Elevated -> elevation.shell
-        WsCardVariant.Code -> 0.dp
     }
     val borderAlpha = when (variant) {
         WsCardVariant.Default -> alpha.selectedOverlay
@@ -86,9 +79,6 @@ fun WsCard(
         modifier = modifier,
         shape = shape,
         colors = CardDefaults.cardColors(containerColor = resolvedContainerColor),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = resolvedElevation,
-        ),
         border = BorderStroke(border.thin, MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)),
     ) {
         androidx.compose.foundation.layout.Box(modifier = Modifier.padding(resolvedPadding)) {
