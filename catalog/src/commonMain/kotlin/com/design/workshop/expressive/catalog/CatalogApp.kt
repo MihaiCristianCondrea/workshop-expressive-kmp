@@ -59,6 +59,7 @@ import com.design.workshop.expressive.ui.components.progress.WsCircularProgress
 import com.design.workshop.expressive.ui.components.progress.WsLinearProgress
 import com.design.workshop.expressive.ui.theme.WorkshopTheme
 import com.design.workshop.expressive.ui.theme.WorkshopThemeTokens
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun CatalogApp() {
@@ -301,7 +302,7 @@ private fun DrawerFooter() {
     }
 }
 
-private val demoPrimaryItems = listOf(
+private val demoPrimaryItems = persistentListOf(
     WsDrawerItem(id = "home", title = "Home", icon = Remix.System.DashboardLine, selectedIcon = Remix.System.DashboardFill),
     WsDrawerItem(id = "courses", title = "Courses", icon = Remix.Document.BookLine, selectedIcon = Remix.Document.BookFill),
     WsDrawerItem(id = "workshops", title = "Workshops", icon = Remix.Development.TerminalWindowLine, selectedIcon = Remix.Development.TerminalWindowFill, badge = "New"),
@@ -309,19 +310,19 @@ private val demoPrimaryItems = listOf(
     WsDrawerItem(id = "settings", title = "Settings", icon = Remix.System.SettingsLine, selectedIcon = Remix.System.SettingsFill),
 )
 
-private val demoCourseItems = listOf(
+private val demoCourseItems = persistentListOf(
     WsDrawerItem(
         id = "android-development",
         title = "Android Development",
         subtitle = "18 / 32 lessons",
         progress = 0.56f,
         initiallyExpanded = true,
-        children = listOf(
+        children = persistentListOf(
             WsDrawerItem(
                 id = "chapter-1",
                 title = "Chapter 1: Getting Started",
                 initiallyExpanded = true,
-                children = listOf(
+                children = persistentListOf(
                     WsDrawerItem(id = "intro", title = "1.1 Introduction"),
                     WsDrawerItem(id = "environment", title = "1.2 Environment Setup"),
                     WsDrawerItem(id = "first-app", title = "1.3 Your First App"),
@@ -331,7 +332,7 @@ private val demoCourseItems = listOf(
                 id = "chapter-2",
                 title = "Chapter 2: Kotlin Basics",
                 initiallyExpanded = true,
-                children = listOf(
+                children = persistentListOf(
                     WsDrawerItem(id = "variables", title = "2.1 Variables & Types"),
                     WsDrawerItem(id = "functions", title = "2.2 Functions"),
                     WsDrawerItem(id = "control-flow", title = "2.3 Control Flow"),

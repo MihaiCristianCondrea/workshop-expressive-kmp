@@ -60,6 +60,8 @@ import com.woowla.compose.icon.collections.remix.remix.arrows.ArrowDownSLine
 import com.design.workshop.expressive.ui.components.progress.WsLinearProgress
 import com.design.workshop.expressive.ui.theme.WorkshopThemeTokens
 import com.design.workshop.expressive.ui.theme.WsColors
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Immutable
 data class WsDrawerItem(
@@ -72,15 +74,15 @@ data class WsDrawerItem(
     val progress: Float? = null,
     val enabled: Boolean = true,
     val initiallyExpanded: Boolean = false,
-    val children: List<WsDrawerItem> = emptyList(),
+    val children: ImmutableList<WsDrawerItem> = persistentListOf(),
 )
 
 @Composable
 fun WsDrawer(
-    primaryItems: List<WsDrawerItem>, // FIXME:Parameter 'primaryItems' has runtime-determined stability
+    primaryItems: ImmutableList<WsDrawerItem>,
     modifier: Modifier = Modifier,
     selectedItemId: String? = null,
-    collapsibleItems: List<WsDrawerItem> = emptyList(), // FIXME: Parameter 'collapsibleItems' has runtime-determined stability
+    collapsibleItems: ImmutableList<WsDrawerItem> = persistentListOf(),
     onItemClick: (WsDrawerItem) -> Unit = {},
     width: Dp = 280.dp,
     header: (@Composable () -> Unit)? = null,
@@ -376,7 +378,7 @@ private val selectedBrush = Brush.horizontalGradient(
     colors = listOf(WsColors.Purple, WsColors.PurpleDark),
 )
 
-private fun List<WsDrawerItem>.collectInitiallyExpandedIds(): Set<String> = buildSet {
+private fun Iterable<WsDrawerItem>.collectInitiallyExpandedIds(): Set<String> = buildSet {
     fun visit(item: WsDrawerItem) {
         if (item.initiallyExpanded) add(item.id)
         item.children.forEach(::visit)

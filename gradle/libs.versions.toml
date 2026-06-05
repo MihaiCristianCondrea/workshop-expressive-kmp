@@ -3,9 +3,10 @@ agp = "9.2.1"
 kotlin = "2.4.0"
 android-minSdk = "24"
 android-compileSdk = "37"
-composeMultiplatform = "1.11.1"
+composeMultiplatform = "1.11.0"
 composeMaterial3 = "1.9.0"
 composeIconCollectionsRemix = "4.9.0"
+kotlinxCollectionsImmutable = "0.4.0"
 
 [libraries]
 compose-icon-collections-remix = { module = "com.woowla.compose.icon.collections:remix", version.ref = "composeIconCollectionsRemix" }
@@ -15,6 +16,7 @@ compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMul
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 
 [plugins]
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
