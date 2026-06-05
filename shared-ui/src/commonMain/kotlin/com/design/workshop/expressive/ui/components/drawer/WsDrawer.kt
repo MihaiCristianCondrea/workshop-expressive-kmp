@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -100,7 +99,7 @@ fun WsDrawer(
             .width(width)
             .fillMaxHeight(),
         color = MaterialTheme.colorScheme.surface,
-        shape = RoundedCornerShape(WorkshopThemeTokens.radius.screen),
+        shape = MaterialTheme.shapes.extraLarge,
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)),
     ) {
         Column(
@@ -178,7 +177,6 @@ private fun WsDrawerItemRow(
     onToggleExpanded: (String) -> Unit,
 ) {
     val spacing = WorkshopThemeTokens.spacing
-    val radius = WorkshopThemeTokens.radius
     val hasChildren = item.children.isNotEmpty()
     val selected = item.id == selectedItemId
     val expanded = item.id in expandedIds
@@ -200,7 +198,7 @@ private fun WsDrawerItemRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(if (level == 0) radius.md else radius.sm))
+                .clip(if (level == 0) MaterialTheme.shapes.medium else MaterialTheme.shapes.small)
                 .drawWithCache {
                     onDrawBehind {
                         if (selectionAlpha > 0f) {
@@ -297,7 +295,7 @@ private fun WsDrawerItemRow(
                         .padding(start = spacing.sm)
                         .background(
                             color = if (selected) Color.White.copy(alpha = 0.18f) else MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
-                            shape = RoundedCornerShape(radius.xs),
+                            shape = MaterialTheme.shapes.extraSmall,
                         )
                         .padding(horizontal = spacing.sm, vertical = 2.dp),
                     color = if (selected) Color.White else MaterialTheme.colorScheme.primary,

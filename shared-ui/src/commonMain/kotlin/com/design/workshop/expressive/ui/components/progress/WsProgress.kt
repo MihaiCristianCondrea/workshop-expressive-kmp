@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -60,13 +60,13 @@ fun WsLinearProgress(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(height)
-                .background(trackColor, RoundedCornerShape(999.dp)),
+                .background(trackColor, CircleShape),
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth(safeProgress)
                     .height(height)
-                    .background(progressColor, RoundedCornerShape(999.dp)),
+                    .background(progressColor, CircleShape),
             )
         }
     }

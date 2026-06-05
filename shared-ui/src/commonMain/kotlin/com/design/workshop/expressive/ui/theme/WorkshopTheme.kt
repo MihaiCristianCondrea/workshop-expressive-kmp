@@ -15,11 +15,13 @@ private val DarkScheme = darkColorScheme(
     surface = WsColors.DarkSurface,
     surfaceVariant = WsColors.DarkSurfaceVariant,
     primaryContainer = WsColors.DarkPrimarySoft,
+    secondaryContainer = WsColors.DarkSurfaceVariant,
     outline = WsColors.DarkBorderSubtle,
     outlineVariant = WsColors.DarkProgressTrack,
     error = WsColors.Red,
     onPrimary = WsColors.TextPrimaryDark,
     onSecondary = WsColors.TextPrimaryDark,
+    onSecondaryContainer = WsColors.TextPrimaryDark,
     onBackground = WsColors.TextPrimaryDark,
     onSurface = WsColors.TextPrimaryDark,
     onSurfaceVariant = WsColors.TextSecondaryDark,
@@ -33,11 +35,13 @@ private val LightScheme = lightColorScheme(
     surface = WsColors.LightSurface,
     surfaceVariant = WsColors.LightSurfaceVariant,
     primaryContainer = WsColors.LightPrimarySoft,
+    secondaryContainer = WsColors.LightSurfaceVariant,
     outline = WsColors.LightBorderSubtle,
     outlineVariant = WsColors.LightProgressTrack,
     error = WsColors.Red,
     onPrimary = WsColors.TextPrimaryDark,
     onSecondary = WsColors.TextPrimaryDark,
+    onSecondaryContainer = WsColors.TextPrimaryLight,
     onBackground = WsColors.TextPrimaryLight,
     onSurface = WsColors.TextPrimaryLight,
     onSurfaceVariant = WsColors.TextSecondaryLight,
@@ -47,7 +51,6 @@ private val LightScheme = lightColorScheme(
 fun WorkshopTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     spacing: WsSpacing = WsSpacing(),
-    radius: WsRadius = WsRadius(),
     border: WsBorder = WsBorder(),
     elevation: WsElevation = WsElevation(),
     alpha: WsAlpha = WsAlpha(),
@@ -55,7 +58,6 @@ fun WorkshopTheme(
 ) {
     CompositionLocalProvider(
         LocalWsSpacing provides spacing,
-        LocalWsRadius provides radius,
         LocalWsBorder provides border,
         LocalWsElevation provides elevation,
         LocalWsAlpha provides alpha,
@@ -72,9 +74,6 @@ fun WorkshopTheme(
 object WorkshopThemeTokens {
     val spacing: WsSpacing
         @Composable get() = LocalWsSpacing.current
-
-    val radius: WsRadius
-        @Composable get() = LocalWsRadius.current
 
     val border: WsBorder
         @Composable get() = LocalWsBorder.current

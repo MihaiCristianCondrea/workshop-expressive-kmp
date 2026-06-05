@@ -3,14 +3,12 @@ package com.design.workshop.expressive.ui.components.badge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.design.workshop.expressive.ui.theme.WorkshopThemeTokens
 import com.design.workshop.expressive.ui.theme.WsColors
 
 enum class WsBadgeTone {
@@ -29,12 +27,10 @@ fun WsBadge(
 ) {
     val background = tone.containerColor
     val foreground = tone.contentColor
-    val radius = WorkshopThemeTokens.radius
-
     Text(
         text = text,
         modifier = modifier
-            .background(background, RoundedCornerShape(radius.xs))
+            .background(background, MaterialTheme.shapes.extraSmall)
             .padding(PaddingValues(horizontal = 8.dp, vertical = 2.dp)),
         color = foreground,
         style = MaterialTheme.typography.labelSmall,

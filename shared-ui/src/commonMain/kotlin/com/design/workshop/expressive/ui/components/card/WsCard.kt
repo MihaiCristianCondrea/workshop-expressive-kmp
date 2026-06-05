@@ -3,7 +3,6 @@ package com.design.workshop.expressive.ui.components.card
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -26,7 +25,7 @@ enum class WsCardVariant {
 /**
  * Shared Workshop card surface.
  *
- * Use [WsCardVariant.Screen] for Atlas-style screen cards with a large radius, subtle border,
+ * Use [WsCardVariant.Screen] for Atlas-style screen cards with the shared shape token, subtle border,
  * surface background, 22.dp padding, and low shadow. Use [WsCardVariant.Code] for code snippets
  * or preformatted content that should sit on the semantic code-background token.
  */
@@ -36,14 +35,13 @@ fun WsCard(
     variant: WsCardVariant = WsCardVariant.Default,
     containerColor: Color? = null,
     contentPadding: PaddingValues? = null,
+    shape: Shape? = null,
     content: @Composable () -> Unit,
 ) {
-    val radius = WorkshopThemeTokens.radius
     val spacing = WorkshopThemeTokens.spacing
     val border = WorkshopThemeTokens.border
     val alpha = WorkshopThemeTokens.alpha
-
-    val shape: Shape = RoundedCornerShape(radius.md)
+    val resolvedShape = shape ?: MaterialTheme.shapes.medium
 
     val resolvedPadding = contentPadding ?: when (variant) {
         WsCardVariant.Default -> PaddingValues(spacing.lg)
@@ -70,7 +68,7 @@ fun WsCard(
 
     Card(
         modifier = modifier,
-        shape = shape,
+        shape = resolvedShape,
         colors = CardDefaults.cardColors(containerColor = resolvedContainerColor),
         border = BorderStroke(border.thin, MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)),
     ) {
