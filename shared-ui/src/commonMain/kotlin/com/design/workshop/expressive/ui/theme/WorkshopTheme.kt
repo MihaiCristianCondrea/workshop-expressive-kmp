@@ -13,6 +13,9 @@ private val DarkScheme = darkColorScheme(
     background = WsColors.DarkBackground,
     surface = WsColors.DarkSurface,
     surfaceVariant = WsColors.DarkSurfaceVariant,
+    primaryContainer = WsColors.DarkPrimarySoft,
+    outline = WsColors.DarkBorderSubtle,
+    outlineVariant = WsColors.DarkProgressTrack,
     error = WsColors.Red,
     onPrimary = WsColors.TextPrimaryDark,
     onSecondary = WsColors.TextPrimaryDark,
@@ -28,6 +31,9 @@ private val LightScheme = lightColorScheme(
     background = WsColors.LightBackground,
     surface = WsColors.LightSurface,
     surfaceVariant = WsColors.LightSurfaceVariant,
+    primaryContainer = WsColors.LightPrimarySoft,
+    outline = WsColors.LightBorderSubtle,
+    outlineVariant = WsColors.LightProgressTrack,
     error = WsColors.Red,
     onPrimary = WsColors.TextPrimaryDark,
     onSecondary = WsColors.TextPrimaryDark,
@@ -40,9 +46,19 @@ private val LightScheme = lightColorScheme(
 fun WorkshopTheme(
     darkTheme: Boolean = true,
     spacing: WsSpacing = WsSpacing(),
+    radius: WsRadius = WsRadius(),
+    border: WsBorder = WsBorder(),
+    elevation: WsElevation = WsElevation(),
+    alpha: WsAlpha = WsAlpha(),
     content: @Composable () -> Unit,
 ) {
-    CompositionLocalProvider(LocalWsSpacing provides spacing) {
+    CompositionLocalProvider(
+        LocalWsSpacing provides spacing,
+        LocalWsRadius provides radius,
+        LocalWsBorder provides border,
+        LocalWsElevation provides elevation,
+        LocalWsAlpha provides alpha,
+    ) {
         MaterialTheme(
             colorScheme = if (darkTheme) DarkScheme else LightScheme,
             typography = WsTypography,
@@ -55,4 +71,16 @@ fun WorkshopTheme(
 object WorkshopThemeTokens {
     val spacing: WsSpacing
         @Composable get() = LocalWsSpacing.current
+
+    val radius: WsRadius
+        @Composable get() = LocalWsRadius.current
+
+    val border: WsBorder
+        @Composable get() = LocalWsBorder.current
+
+    val elevation: WsElevation
+        @Composable get() = LocalWsElevation.current
+
+    val alpha: WsAlpha
+        @Composable get() = LocalWsAlpha.current
 }
