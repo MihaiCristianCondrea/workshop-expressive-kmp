@@ -27,7 +27,7 @@ import com.design.workshop.expressive.ui.theme.WsColors
  * Interactive Atlas-style search input surface.
  *
  * The default leading content is a text magnifier so the field works on all KMP targets without
- * requiring platform icon resources. Consumers that use the exported Remix icon collection can pass
+ * requiring platform icon resources. Consumers can pass the exported Remix icons or any other supported icon pack through
  * an `Icon(imageVector = Remix.System.SearchLine, ...)` as [leadingIcon].
  */
 @Composable

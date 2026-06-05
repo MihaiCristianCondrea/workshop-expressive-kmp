@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
  *
  * Provide either [backgroundBrush] for a branded gradient avatar or [backgroundColor] for a flat
  * Atlas-style tinted avatar. The component uses only common Compose APIs and is safe on Android,
- * iOS, JVM, JS, and Wasm targets.
+ * iOS, JVM, and Web (Wasm) targets.
  */
 @Composable
 fun WsAvatar(
