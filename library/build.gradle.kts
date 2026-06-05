@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -9,6 +10,7 @@ plugins {
 group = "com.design.workshop.expressive"
 version = "0.0.5"
 
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvm()
     androidLibrary {
@@ -28,6 +30,12 @@ kotlin {
     }
     iosArm64()
     iosSimulatorArm64()
+    js {
+        browser()
+    }
+    wasmJs {
+        browser()
+    }
     linuxX64()
 
     sourceSets {
