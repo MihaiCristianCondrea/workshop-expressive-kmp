@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
 }
 
@@ -41,7 +42,7 @@ kotlin {
         }
 
         jvmMain.dependencies {
-            implementation(libs.compose.desktop.current.os)
+            implementation(compose.desktop.currentOs)
         }
     }
 }
