@@ -45,6 +45,7 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.material3)
             implementation(libs.compose.components.resources)
+            api(libs.kotlinx.collections.immutable)
         }
     }
 }

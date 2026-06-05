@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.design.workshop.expressive.ui.theme.WorkshopThemeTokens
 import com.design.workshop.expressive.ui.theme.WsColors
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 /**
  * Parameterized brand lockup inspired by AtlasLogo.
@@ -35,13 +37,13 @@ fun WsBrandMark(
     title: String,
     subtitle: String?,
     size: Dp,
-    gradientColors: List<Color>, // FIXME: Parameter 'gradientColors' has runtime-determined stability
+    gradientColors: ImmutableList<Color>,
     modifier: Modifier = Modifier,
 ) {
     val colors = if (gradientColors.size >= 2) {
         gradientColors
     } else {
-        listOf(MaterialTheme.colorScheme.primary, WsColors.GradientAccent)
+        persistentListOf(MaterialTheme.colorScheme.primary, WsColors.GradientAccent)
     }
 
     Row(
