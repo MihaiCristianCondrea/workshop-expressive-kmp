@@ -2,7 +2,10 @@ package com.design.workshop.expressive.ui.components.drawer
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -32,7 +35,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -40,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -85,6 +91,7 @@ fun WsDrawer(
         (primaryItems + collapsibleItems).collectInitiallyExpandedIds()
     }
     var expandedIds by remember(initiallyExpandedIds) { mutableStateOf(initiallyExpandedIds) }
+    var settingsSpinTrigger by remember { mutableIntStateOf(0) }
 
     Surface(
         modifier = modifier
@@ -112,7 +119,9 @@ fun WsDrawer(
                         selectedItemId = selectedItemId,
                         expandedIds = expandedIds,
                         level = 0,
+                        settingsSpinTrigger = settingsSpinTrigger,
                         onItemClick = onItemClick,
+                        onSettingsSelected = { settingsSpinTrigger += 1 },
                         onToggleExpanded = { toggledId ->
                             expandedIds = if (toggledId in expandedIds) {
                                 expandedIds - toggledId
@@ -136,7 +145,9 @@ fun WsDrawer(
                         selectedItemId = selectedItemId,
                         expandedIds = expandedIds,
                         level = 0,
+                        settingsSpinTrigger = settingsSpinTrigger,
                         onItemClick = onItemClick,
+                        onSettingsSelected = { settingsSpinTrigger += 1 },
                         onToggleExpanded = { toggledId ->
                             expandedIds = if (toggledId in expandedIds) {
                                 expandedIds - toggledId
@@ -159,7 +170,9 @@ private fun WsDrawerItemRow(
     selectedItemId: String?,
     expandedIds: Set<String>,
     level: Int,
+    settingsSpinTrigger: Int,
     onItemClick: (WsDrawerItem) -> Unit,
+    onSettingsSelected: () -> Unit,
     onToggleExpanded: (String) -> Unit,
 ) {
     val spacing = WorkshopThemeTokens.spacing
@@ -171,10 +184,6 @@ private fun WsDrawerItemRow(
 
     val selectionAlpha by animateFloatAsState(if (selected) 1f else 0f, label = "Selection Background Alpha")
     val arrowRotation by animateFloatAsState(if (expanded) 180f else 0f, label = "Arrow Rotation")
-    val settingsIconRotation by animateFloatAsState(
-        targetValue = if (item.id == "settings" && selected) 180f else 0f,
-        label = "Settings Icon Rotation",
-    )
 
     val contentColor by animateColorAsState(
         targetValue = if (selected) Color.White else MaterialTheme.colorScheme.onSurface,
@@ -201,6 +210,10 @@ private fun WsDrawerItemRow(
                     }
                 }
                 .clickable(enabled = item.enabled) {
+                    if (item.id == SETTINGS_ITEM_ID) {
+                        onSettingsSelected()
+                    }
+
                     if (hasChildren) {
                         onToggleExpanded(item.id)
                     } else {
@@ -217,14 +230,22 @@ private fun WsDrawerItemRow(
         ) {
             val displayIcon = if (selected && item.selectedIcon != null) item.selectedIcon else item.icon
             if (displayIcon != null) {
-                Icon(
-                    imageVector = displayIcon,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(if (level == 0) 20.dp else 16.dp)
-                        .graphicsLayer { rotationZ = settingsIconRotation },
-                    tint = variantColor,
-                )
+                val iconModifier = Modifier.size(if (level == 0) 20.dp else 16.dp)
+                if (item.id == SETTINGS_ITEM_ID) {
+                    SpinningSettingsIcon(
+                        trigger = settingsSpinTrigger,
+                        imageVector = displayIcon,
+                        tint = variantColor,
+                        modifier = iconModifier,
+                    )
+                } else {
+                    Icon(
+                        imageVector = displayIcon,
+                        contentDescription = null,
+                        modifier = iconModifier,
+                        tint = variantColor,
+                    )
+                }
                 Spacer(Modifier.width(spacing.md))
             } else if (level > 0) {
                 Box(
@@ -308,7 +329,9 @@ private fun WsDrawerItemRow(
                         selectedItemId = selectedItemId,
                         expandedIds = expandedIds,
                         level = level + 1,
+                        settingsSpinTrigger = settingsSpinTrigger,
                         onItemClick = onItemClick,
+                        onSettingsSelected = onSettingsSelected,
                         onToggleExpanded = onToggleExpanded,
                     )
                 }
@@ -316,6 +339,38 @@ private fun WsDrawerItemRow(
         }
     }
 }
+
+@Composable
+private fun SpinningSettingsIcon(
+    trigger: Int,
+    imageVector: ImageVector,
+    tint: Color,
+    modifier: Modifier = Modifier,
+) {
+    val rotation = remember { Animatable(0f) }
+
+    LaunchedEffect(trigger) {
+        if (trigger > 0) {
+            rotation.snapTo(0f)
+            rotation.animateTo(
+                targetValue = 360f,
+                animationSpec = tween(
+                    durationMillis = 300,
+                    easing = FastOutSlowInEasing,
+                ),
+            )
+        }
+    }
+
+    Icon(
+        imageVector = imageVector,
+        contentDescription = null,
+        modifier = modifier.rotate(rotation.value),
+        tint = tint,
+    )
+}
+
+private const val SETTINGS_ITEM_ID = "settings"
 
 private val selectedBrush = Brush.horizontalGradient(
     colors = listOf(WsColors.Purple, WsColors.PurpleDark),
