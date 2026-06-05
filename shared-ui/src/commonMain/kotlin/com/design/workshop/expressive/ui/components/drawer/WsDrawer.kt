@@ -91,7 +91,7 @@ fun WsDrawer(
             .width(width)
             .fillMaxHeight(),
         color = MaterialTheme.colorScheme.surface,
-        shape = MaterialTheme.shapes.large,
+        shape = RoundedCornerShape(WorkshopThemeTokens.radius.screen),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)),
     ) {
         Column(
@@ -171,6 +171,10 @@ private fun WsDrawerItemRow(
 
     val selectionAlpha by animateFloatAsState(if (selected) 1f else 0f, label = "Selection Background Alpha")
     val arrowRotation by animateFloatAsState(if (expanded) 180f else 0f, label = "Arrow Rotation")
+    val settingsIconRotation by animateFloatAsState(
+        targetValue = if (item.id == "settings" && selected) 180f else 0f,
+        label = "Settings Icon Rotation",
+    )
 
     val contentColor by animateColorAsState(
         targetValue = if (selected) Color.White else MaterialTheme.colorScheme.onSurface,
@@ -216,7 +220,9 @@ private fun WsDrawerItemRow(
                 Icon(
                     imageVector = displayIcon,
                     contentDescription = null,
-                    modifier = Modifier.size(if (level == 0) 20.dp else 16.dp),
+                    modifier = Modifier
+                        .size(if (level == 0) 20.dp else 16.dp)
+                        .graphicsLayer { rotationZ = settingsIconRotation },
                     tint = variantColor,
                 )
                 Spacer(Modifier.width(spacing.md))

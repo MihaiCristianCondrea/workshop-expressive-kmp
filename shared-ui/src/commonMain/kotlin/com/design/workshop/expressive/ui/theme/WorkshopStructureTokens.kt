@@ -9,12 +9,12 @@ import androidx.compose.ui.unit.dp
 @Immutable
 data class WsRadius(
     val xs: Dp = 2.dp,
-    val sm: Dp = 4.dp,
-    val md: Dp = 6.dp,
-    val lg: Dp = 8.dp,
-    val xl: Dp = 10.dp,
-    val xxl: Dp = 12.dp,
-    val screen: Dp = 16.dp,
+    val sm: Dp = 3.dp,
+    val md: Dp = 4.dp,
+    val lg: Dp = 6.dp,
+    val xl: Dp = 8.dp,
+    val xxl: Dp = 10.dp,
+    val screen: Dp = 12.dp,
     val pill: Dp = 999.dp,
 )
 
