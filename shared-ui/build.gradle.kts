@@ -26,10 +26,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    js {
-        browser()
-    }
-
     wasmJs {
         browser()
     }
@@ -38,6 +34,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(libs.compose.icon.collections.remix)
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.ui)

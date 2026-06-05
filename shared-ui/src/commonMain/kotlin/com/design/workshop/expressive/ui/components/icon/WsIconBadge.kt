@@ -30,7 +30,7 @@ enum class WsIconBadgeSize(val dp: Dp) {
  * Centers a short text or symbol in a tinted shape.
  *
  * This multiplatform atom can replace Atlas-style `SmallIcon`, `CourseIcon`, or stat-card
- * circular icon containers. Pass an icon glyph as [text], an emoji, initials, or any short
+ * circular icon containers. Pass a Remix icon glyph as [text], an emoji, initials, or any short
  * label when an `ImageVector` is not required.
  */
 @Composable

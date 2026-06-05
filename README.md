@@ -72,7 +72,7 @@ Use Gradle project dependencies for local development instead of publishing snap
 implementation(project(":shared-ui"))
 ```
 
-The `:catalog` module is the recommended test surface. It compiles the same component gallery against Android, iOS simulator, JVM desktop, JS, and Wasm JS targets so regressions are caught before publishing.
+The `:catalog` module is the recommended test surface. It compiles the same component gallery against Android, iOS simulator, JVM desktop, and Web (Wasm) targets so regressions are caught before publishing.
 
 ### Local commands
 
@@ -106,8 +106,21 @@ For lesson detail screens, the left side should hold the lesson content, Markdow
 
 The goal is focus and momentum: Atlas should make learners feel like they are moving forward through a learning path, not simply operating a productivity app.
 
-## Icons
+## Compose icon collections
 
-WorkShop Expressive components accept plain Compose icon slots, `ImageVector` values, or text/emoji fallbacks depending on the component. The library intentionally does not export a third-party icon pack from `commonMain`, because icon collections can have narrower platform support than this design system and can break JS/Wasm builds.
+The `shared-ui` module exposes the open source [Remix Icon Compose collection](https://github.com/walter-juan/compose-icon-collections) as an `api` dependency. Remix supports the platforms this Compose UI library targets: Android, iOS, Desktop (JVM), and Web (Wasm).
 
-Apps should add their preferred icon pack directly in the source set where it is supported. For example, if a product uses Remix icons on Android, iOS, JVM, and Wasm, keep that dependency in the app or in platform-specific source sets instead of forcing every `:shared-ui` consumer to resolve it on JS.
+This project intentionally uses **Kotlin/Wasm** for the shared Compose web surface. Kotlin/JS is better suited to web-native or JavaScript/TypeScript interop use cases, while Kotlin/Wasm is the recommended target when sharing both UI and business logic with Compose Multiplatform.
+
+Available icon pack:
+
+| Icon pack | Artifact | Version |
+| --- | --- | --- |
+| Remix Icon | `com.woowla.compose.icon.collections:remix` | `4.9.0` |
+
+Example usage from a consuming Compose Multiplatform app:
+
+```kotlin
+Icon(imageVector = Remix.System.HomeLine, contentDescription = null)
+Icon(imageVector = Remix.Health.MedicineBottleFill, contentDescription = null)
+```

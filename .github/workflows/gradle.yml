@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 # This workflow builds the Kotlin Multiplatform modules on the targets we support
-# for local component validation: Desktop/JVM, Android, iOS simulator, JS, and Wasm.
+# for local component validation: Desktop/JVM, Android, iOS simulator, and Web (Wasm).
 
 name: Java CI with Gradle
 
@@ -28,9 +28,6 @@ jobs:
             os: ubuntu-latest
           - name: android-compile
             target: :shared-ui:compileAndroidMain :catalog:compileAndroidMain
-            os: ubuntu-latest
-          - name: js-compile
-            target: :shared-ui:compileKotlinJs :catalog:compileKotlinJs
             os: ubuntu-latest
           - name: wasm-compile
             target: :shared-ui:compileKotlinWasmJs :catalog:compileKotlinWasmJs :webApp:compileKotlinWasmJs
