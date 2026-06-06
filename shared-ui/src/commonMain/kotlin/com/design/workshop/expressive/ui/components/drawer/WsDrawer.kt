@@ -99,7 +99,7 @@ fun WsDrawer(
             .width(width)
             .fillMaxHeight(),
         color = MaterialTheme.colorScheme.surface,
-        shape = MaterialTheme.shapes.extraLarge,
+        shape = MaterialTheme.shapes.medium,
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)),
     ) {
         Column(
