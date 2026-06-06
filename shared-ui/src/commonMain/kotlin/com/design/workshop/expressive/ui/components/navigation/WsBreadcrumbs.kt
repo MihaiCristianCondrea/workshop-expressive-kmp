@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,7 +33,6 @@ fun WsBreadcrumbs(
     contentColor: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     val spacing = WorkshopThemeTokens.spacing
-    val radius = WorkshopThemeTokens.radius
 
     Row(
         modifier = modifier,
@@ -50,7 +48,7 @@ fun WsBreadcrumbs(
                 color = if (isLast) MaterialTheme.colorScheme.onSurface else contentColor,
                 fontWeight = if (isLast) FontWeight.SemiBold else FontWeight.Medium,
                 modifier = Modifier
-                    .clip(RoundedCornerShape(radius.xs))
+                    .clip(MaterialTheme.shapes.extraSmall)
                     .clickable(enabled = !isLast) { crumb.onClick() }
                     .padding(horizontal = spacing.sm, vertical = spacing.xs)
             )

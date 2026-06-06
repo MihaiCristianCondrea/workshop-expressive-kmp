@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.Image
 import org.jetbrains.compose.resources.painterResource
 import com.design.workshop.expressive.shared_ui.generated.resources.Res
@@ -46,8 +45,6 @@ import com.woowla.compose.icon.collections.remix.remix.system.DashboardFill
 import com.woowla.compose.icon.collections.remix.remix.system.DashboardLine
 import com.woowla.compose.icon.collections.remix.remix.system.SettingsFill
 import com.woowla.compose.icon.collections.remix.remix.system.SettingsLine
-import com.design.workshop.expressive.ui.components.badge.WsBadge
-import com.design.workshop.expressive.ui.components.badge.WsBadgeTone
 import com.design.workshop.expressive.ui.components.button.WsButton
 import com.design.workshop.expressive.ui.components.button.WsButtonSize
 import com.design.workshop.expressive.ui.components.button.WsButtonVariant
@@ -105,7 +102,6 @@ fun ComponentGallery() {
             )
 
             Column(verticalArrangement = Arrangement.spacedBy(spacing.sm)) {
-                WsBadge(text = "Milestone 1", tone = WsBadgeTone.Info)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = "Work",
@@ -127,11 +123,6 @@ fun ComponentGallery() {
                         fontWeight = FontWeight.Bold,
                     )
                 }
-                Text(
-                    text = "White-first tokens and reusable learning UI components for Kotlin Multiplatform apps.",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyLarge,
-                )
             }
 
             WsCard(modifier = Modifier.fillMaxWidth()) {
@@ -167,13 +158,38 @@ fun ComponentGallery() {
                     Row(horizontalArrangement = Arrangement.spacedBy(spacing.md)) {
                         WsButton(text = "Primary", onClick = {}, variant = WsButtonVariant.Primary)
                         WsButton(text = "Secondary", onClick = {}, variant = WsButtonVariant.Secondary)
-                        WsButton(text = "Tertiary", onClick = {}, variant = WsButtonVariant.Tertiary)
+                        WsButton(text = "Outlined", onClick = {}, variant = WsButtonVariant.Outlined)
                         WsButton(text = "Ghost", onClick = {}, variant = WsButtonVariant.Ghost)
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(spacing.md)) {
                         WsButton(text = "Small", onClick = {}, size = WsButtonSize.Small)
                         WsButton(text = "Medium", onClick = {}, size = WsButtonSize.Medium)
                         WsButton(text = "Large", onClick = {}, size = WsButtonSize.Large)
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(spacing.md)) {
+                        WsButton(
+                            onClick = {},
+                            icon = Remix.Arrows.ArrowRightLine,
+                            contentDescription = "Open",
+                        )
+                        WsButton(
+                            onClick = {},
+                            icon = Remix.System.SettingsLine,
+                            contentDescription = "Settings",
+                            variant = WsButtonVariant.Secondary,
+                        )
+                        WsButton(
+                            text = "Next",
+                            onClick = {},
+                            icon = Remix.Arrows.ArrowRightLine,
+                            variant = WsButtonVariant.Outlined,
+                        )
+                        WsButton(
+                            text = "Settings",
+                            onClick = {},
+                            icon = Remix.System.SettingsLine,
+                            variant = WsButtonVariant.Ghost,
+                        )
                     }
                 }
             }
@@ -260,7 +276,7 @@ private fun ColorSwatch(name: String, color: Color) {
         Box(
             modifier = Modifier
                 .size(48.dp)
-                .background(color, RoundedCornerShape(WorkshopThemeTokens.radius.sm))
+                .background(color, MaterialTheme.shapes.small)
         )
         Text(text = name, style = MaterialTheme.typography.labelSmall)
     }
@@ -326,7 +342,7 @@ private fun DrawerFooter() {
                 onClick = {},
                 modifier = Modifier.fillMaxWidth(),
                 size = WsButtonSize.Small,
-                variant = WsButtonVariant.Tertiary,
+                variant = WsButtonVariant.Outlined,
             )
         }
     }

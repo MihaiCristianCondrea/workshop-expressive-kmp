@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,7 +38,7 @@ fun WsIconBadge(
     color: Color,
     size: Dp,
     modifier: Modifier = Modifier,
-    shape: Shape = RoundedCornerShape(WorkshopThemeTokens.radius.lg),
+    shape: Shape = MaterialTheme.shapes.large,
     fontSize: TextUnit = TextUnit.Unspecified,
     backgroundAlpha: Float = WorkshopThemeTokens.alpha.soft,
     contentColor: Color = color,
@@ -67,7 +66,7 @@ fun WsIconBadge(
     color: Color,
     size: WsIconBadgeSize,
     modifier: Modifier = Modifier,
-    shape: Shape = if (size == WsIconBadgeSize.Small) CircleShape else RoundedCornerShape(WorkshopThemeTokens.radius.lg),
+    shape: Shape = if (size == WsIconBadgeSize.Small) CircleShape else MaterialTheme.shapes.large,
     fontSize: TextUnit = when (size) {
         WsIconBadgeSize.Small -> 14.sp
         WsIconBadgeSize.Medium -> 18.sp
